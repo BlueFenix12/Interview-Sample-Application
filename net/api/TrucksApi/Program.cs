@@ -1,18 +1,12 @@
-using Asp.Versioning;
 using TrucksApi.Configuration;
-using TrucksApi.Configuration.ApiVersioning;
-using TrucksManager.Trucks.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services
-    .AddControllers(options => options.UseRoutePrefix("api/v{version:apiVersion}"))
-    .AddApplicationPart(typeof(AssemblyMarker).Assembly);
-
+builder.Services.ConfigureControllers();
 builder.Services.ConfigureApiVersioning();
 builder.Services.ConfigureSwagger();
+
+builder.Host.ConfigureAutofacContainer();
 
 var app = builder.Build();
 

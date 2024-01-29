@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Http" Version="6.4.0" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="6.4.0" />
+    <PackageReference Include="Autofac" Version="6.5.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\features\Trucks\TrucksManager.Trucks.Api\TrucksManager.Trucks.Api.csproj" />
-    <ProjectReference Include="..\TrucksApi.Configuration\TrucksApi.Configuration.csproj" />
+    <ProjectReference Include="..\..\features\Trucks\TrucksManager.Trucks.Module\TrucksManager.Trucks.Module.csproj" />
   </ItemGroup>
 
 </Project>
