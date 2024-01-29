@@ -1,7 +1,8 @@
+using Serilog;
 using TrucksApi.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.ConfigureSerilog();
 builder.Services.ConfigureControllers();
 builder.Services.ConfigureApiVersioning();
 builder.Services.ConfigureSwagger();
@@ -15,6 +16,8 @@ if (app.Environment.IsDevelopment())
 {
     app.ConfigureSwaggerApplication();
 }
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
