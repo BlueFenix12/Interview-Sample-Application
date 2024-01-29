@@ -18,9 +18,9 @@ public class TrucksController : ControllerBase
     }
 
     [HttpGet("ping")]
-    public async Task<IActionResult> Ping(CancellationToken cancellationToken)
+    public async Task<IActionResult> Ping([FromQuery] string text, CancellationToken cancellationToken)
     {
-        var result = await this.mediator.Send(new PingQuery(), cancellationToken);
+        var result = await this.mediator.Send(new PingQuery { Value = text }, cancellationToken);
         return Ok(result);
     }
 }

@@ -6,7 +6,17 @@ namespace TrucksManager.Trucks.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // TODO: add registrations
+            ConfigureFluentValidations(builder);
+        }
+
+        private static void ConfigureFluentValidations(ContainerBuilder builder)
+        {
+            builder
+                .RegisterAssemblyTypes(typeof(AssemblyMarker).Assembly)
+                .Where(t => t.Name.EndsWith("QueryValidator", StringComparison.InvariantCultureIgnoreCase)
+                            || t.Name.EndsWith("CommandValidator", StringComparison.InvariantCultureIgnoreCase))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
         }
     }
 }
