@@ -1,5 +1,5 @@
 ﻿using TrucksApi.Configuration.ApiVersioning;
-using TrucksManager.Trucks.Module;
+using TrucksManager.Trucks.Module.ApiConfiguration;
 
 namespace TrucksApi.Configuration;
 

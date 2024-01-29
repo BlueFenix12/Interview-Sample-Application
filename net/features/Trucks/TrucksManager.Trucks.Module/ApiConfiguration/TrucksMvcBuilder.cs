@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace TrucksManager.Trucks.Module;
+namespace TrucksManager.Trucks.Module.ApiConfiguration;
 
 public static class TrucksMvcBuilder
 {
