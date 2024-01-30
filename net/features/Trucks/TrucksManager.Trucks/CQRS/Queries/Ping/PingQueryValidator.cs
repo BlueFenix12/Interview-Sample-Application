@@ -6,6 +6,6 @@ public class PingQueryValidator : AbstractValidator<PingQuery>
 {
     public PingQueryValidator()
     {
-        this.RuleFor(x => x.Value).NotEmpty();
+        this.RuleFor(x => x.Value).NotEmpty().MaximumLength(3);
     }
 }

@@ -18,9 +18,20 @@ public class TrucksController : ControllerBase
     }
 
     [HttpGet("ping")]
-    public async Task<IActionResult> Ping([FromQuery] string text, CancellationToken cancellationToken)
+    public async Task<IActionResult> Ping([FromQuery] PingQuery pingQuery, CancellationToken cancellationToken)
     {
-        var result = await this.mediator.Send(new PingQuery { Value = text }, cancellationToken);
-        return Ok(result);
+        var validationResult = await this.mediator.Send(new ValidationQuery<PingQuery> { Data = pingQuery}, cancellationToken);
+        if (!validationResult.IsSuccess)
+        {
+            return BadRequest(validationResult.ValidationErrors);
+        }
+        
+        var queryResult = await this.mediator.Send(pingQuery, cancellationToken);
+        if(!queryResult.IsSuccess)
+        {
+            return Problem(queryResult.Value);
+        }
+        
+        return Ok(queryResult.Value);
     }
 }
