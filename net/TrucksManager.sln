@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{8BDA774D-C40F-4C57-BC1E-84113B1495F6}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrucksApi", "api\TrucksApi\TrucksApi.csproj", "{20F75C99-E37E-4890-8FFC-0BBFD985F899}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{D681C73E-61B1-43A4-B521-68BD344EE123}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Common", "common\TrucksManager.Common\TrucksManager.Common.csproj", "{6198BB0C-4070-4078-8AA2-7D39A36DA036}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "features", "features", "{9251A617-302D-48B8-BF21-6639C8EBA8EE}"
 EndProject
@@ -11,15 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trucks", "Trucks", "{57114B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Trucks.Api", "features\Trucks\TrucksManager.Trucks.Api\TrucksManager.Trucks.Api.csproj", "{860EE343-3856-402D-B452-25DE62826362}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{8BDA774D-C40F-4C57-BC1E-84113B1495F6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Trucks.Module", "features\Trucks\TrucksManager.Trucks.Module\TrucksManager.Trucks.Module.csproj", "{799E23D0-AE0F-4556-AA40-4879C04855F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Trucks", "features\Trucks\TrucksManager.Trucks\TrucksManager.Trucks.csproj", "{E266BF6D-979E-49A8-9B23-6C34C4F92E31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Common", "common\TrucksManager.Common\TrucksManager.Common.csproj", "{6198BB0C-4070-4078-8AA2-7D39A36DA036}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Trucks.Domain", "features\Trucks\TrucksManager.Trucks.Domain\TrucksManager.Trucks.Domain.csproj", "{8B468404-D803-4AE5-855E-796BE3686DBF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{D681C73E-61B1-43A4-B521-68BD344EE123}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Trucks.Infrastructure", "features\Trucks\TrucksManager.Trucks.Infrastructure\TrucksManager.Trucks.Infrastructure.csproj", "{214013AC-28CD-4A29-B6EC-8F7E1AF23FBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Trucks.DataAccess", "features\Trucks\TrucksManager.Trucks.DataAccess\TrucksManager.Trucks.DataAccess.csproj", "{C7CFE0C9-0A38-4DC7-8F0E-CC4EE134A7E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +53,18 @@ Global
 		{6198BB0C-4070-4078-8AA2-7D39A36DA036}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6198BB0C-4070-4078-8AA2-7D39A36DA036}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6198BB0C-4070-4078-8AA2-7D39A36DA036}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B468404-D803-4AE5-855E-796BE3686DBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B468404-D803-4AE5-855E-796BE3686DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B468404-D803-4AE5-855E-796BE3686DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B468404-D803-4AE5-855E-796BE3686DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{214013AC-28CD-4A29-B6EC-8F7E1AF23FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{214013AC-28CD-4A29-B6EC-8F7E1AF23FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{214013AC-28CD-4A29-B6EC-8F7E1AF23FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{214013AC-28CD-4A29-B6EC-8F7E1AF23FBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7CFE0C9-0A38-4DC7-8F0E-CC4EE134A7E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7CFE0C9-0A38-4DC7-8F0E-CC4EE134A7E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7CFE0C9-0A38-4DC7-8F0E-CC4EE134A7E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7CFE0C9-0A38-4DC7-8F0E-CC4EE134A7E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +76,9 @@ Global
 		{799E23D0-AE0F-4556-AA40-4879C04855F9} = {57114BD0-3BEB-4A41-85AF-B3ECE7ECEA02}
 		{E266BF6D-979E-49A8-9B23-6C34C4F92E31} = {57114BD0-3BEB-4A41-85AF-B3ECE7ECEA02}
 		{6198BB0C-4070-4078-8AA2-7D39A36DA036} = {D681C73E-61B1-43A4-B521-68BD344EE123}
+		{8B468404-D803-4AE5-855E-796BE3686DBF} = {57114BD0-3BEB-4A41-85AF-B3ECE7ECEA02}
+		{214013AC-28CD-4A29-B6EC-8F7E1AF23FBD} = {57114BD0-3BEB-4A41-85AF-B3ECE7ECEA02}
+		{C7CFE0C9-0A38-4DC7-8F0E-CC4EE134A7E0} = {57114BD0-3BEB-4A41-85AF-B3ECE7ECEA02}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E789A629-40BA-410C-9250-10EC6156689A}

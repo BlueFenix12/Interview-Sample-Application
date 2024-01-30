@@ -1,9 +1,13 @@
-﻿using Ardalis.Result;
+﻿using System.Net;
+using Ardalis.Result;
 using Asp.Versioning;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrucksManager.Common;
+using TrucksManager.Trucks.CQRS.Commands;
 using TrucksManager.Trucks.CQRS.Queries.Ping;
+using TrucksManager.Trucks.Domain;
 
 namespace TrucksManager.Trucks.Api.Controllers;
 
@@ -19,17 +23,19 @@ public class TrucksController : ControllerBase
         this.mediator = mediator;
     }
 
-    [HttpGet("ping")]
-    public async Task<IActionResult> Ping([FromQuery] Ping.Query query, CancellationToken cancellationToken)
+    [HttpPost("")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AddTruck.CommandResponse))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
+    public async Task<IActionResult> AddTruck([FromBody] AddTruck.Command command, CancellationToken cancellationToken)
     {
-        var result = await this.mediator.Send(query, cancellationToken);
-        if(result.HasValidationErrors())
+        var result = await this.mediator.Send(command, cancellationToken);
+        IActionResult actionResult = result.Status switch
         {
-            return BadRequest(result.ValidationErrors);
-        }
+            ResultStatus.Invalid => this.BadRequest(result.ValidationErrors),
+            ResultStatus.Ok => this.Ok(result.Value),
+            _ => this.Problem(result.GetResultErrorsFormatted())
+        };
 
-        return result.IsSuccess 
-            ? Ok(result.Value) 
-            : Problem();
+        return actionResult;
     }
 }
