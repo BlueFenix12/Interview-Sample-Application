@@ -6,7 +6,6 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-
     <ItemGroup>
       <PackageReference Include="Ardalis.Result" Version="7.2.0" />
       <PackageReference Include="FluentValidation" Version="11.9.0" />
@@ -14,8 +13,5 @@
     </ItemGroup>
 
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\common\TrucksManager.Common\TrucksManager.Common.csproj" />
-    </ItemGroup>
 
 </Project>

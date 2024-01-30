@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\common\TrucksManager.Common\TrucksManager.Common.csproj" />
     <ProjectReference Include="..\..\features\Trucks\TrucksManager.Trucks.Module\TrucksManager.Trucks.Module.csproj" />
   </ItemGroup>
 

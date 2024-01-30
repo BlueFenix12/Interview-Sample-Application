@@ -1,6 +1,8 @@
-﻿using Asp.Versioning;
+﻿using Ardalis.Result;
+using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using TrucksManager.Common;
 using TrucksManager.Trucks.CQRS.Queries.Ping;
 
 namespace TrucksManager.Trucks.Api.Controllers;
@@ -18,20 +20,16 @@ public class TrucksController : ControllerBase
     }
 
     [HttpGet("ping")]
-    public async Task<IActionResult> Ping([FromQuery] PingQuery pingQuery, CancellationToken cancellationToken)
+    public async Task<IActionResult> Ping([FromQuery] Ping.Query query, CancellationToken cancellationToken)
     {
-        var validationResult = await this.mediator.Send(new ValidationQuery<PingQuery> { Data = pingQuery}, cancellationToken);
-        if (!validationResult.IsSuccess)
+        var result = await this.mediator.Send(query, cancellationToken);
+        if(result.HasValidationErrors())
         {
-            return BadRequest(validationResult.ValidationErrors);
+            return BadRequest(result.ValidationErrors);
         }
-        
-        var queryResult = await this.mediator.Send(pingQuery, cancellationToken);
-        if(!queryResult.IsSuccess)
-        {
-            return Problem(queryResult.Value);
-        }
-        
-        return Ok(queryResult.Value);
+
+        return result.IsSuccess 
+            ? Ok(result.Value) 
+            : Problem();
     }
 }

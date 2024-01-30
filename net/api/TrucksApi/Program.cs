@@ -7,8 +7,7 @@ builder.Services.ConfigureControllers();
 builder.Services.ConfigureApiVersioning();
 builder.Services.ConfigureSwagger();
 builder.Services.ConfigureMediatR();
-
-builder.Host.ConfigureAutofacContainer();
+builder.Services.ConfigureFluentValidations();
 
 var app = builder.Build();
 

@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Trucks.Module
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Trucks", "features\Trucks\TrucksManager.Trucks\TrucksManager.Trucks.csproj", "{E266BF6D-979E-49A8-9B23-6C34C4F92E31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucksManager.Common", "common\TrucksManager.Common\TrucksManager.Common.csproj", "{6198BB0C-4070-4078-8AA2-7D39A36DA036}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{D681C73E-61B1-43A4-B521-68BD344EE123}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{E266BF6D-979E-49A8-9B23-6C34C4F92E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E266BF6D-979E-49A8-9B23-6C34C4F92E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E266BF6D-979E-49A8-9B23-6C34C4F92E31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6198BB0C-4070-4078-8AA2-7D39A36DA036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6198BB0C-4070-4078-8AA2-7D39A36DA036}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6198BB0C-4070-4078-8AA2-7D39A36DA036}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6198BB0C-4070-4078-8AA2-7D39A36DA036}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,6 +57,7 @@ Global
 		{860EE343-3856-402D-B452-25DE62826362} = {57114BD0-3BEB-4A41-85AF-B3ECE7ECEA02}
 		{799E23D0-AE0F-4556-AA40-4879C04855F9} = {57114BD0-3BEB-4A41-85AF-B3ECE7ECEA02}
 		{E266BF6D-979E-49A8-9B23-6C34C4F92E31} = {57114BD0-3BEB-4A41-85AF-B3ECE7ECEA02}
+		{6198BB0C-4070-4078-8AA2-7D39A36DA036} = {D681C73E-61B1-43A4-B521-68BD344EE123}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E789A629-40BA-410C-9250-10EC6156689A}
