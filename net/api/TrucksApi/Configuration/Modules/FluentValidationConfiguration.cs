@@ -2,9 +2,9 @@
 
 namespace TrucksApi.Configuration;
 
-public static class FluentValidationConfiguration
+internal static class FluentValidationConfiguration
 {
-    public static void ConfigureFluentValidations(this IServiceCollection services)
+    public static void Configure(IServiceCollection services)
     {
         services.ConfigureValidatorsFromTruckModule();
     }
