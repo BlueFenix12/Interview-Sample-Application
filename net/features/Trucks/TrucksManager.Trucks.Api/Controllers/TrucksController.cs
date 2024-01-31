@@ -1,13 +1,11 @@
-﻿using System.Net;
-using Ardalis.Result;
+﻿using Ardalis.Result;
 using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrucksManager.Common;
 using TrucksManager.Trucks.CQRS.Commands;
-using TrucksManager.Trucks.CQRS.Queries.Ping;
-using TrucksManager.Trucks.Domain;
+using TrucksManager.Trucks.CQRS.Queries.TrucksList;
 
 namespace TrucksManager.Trucks.Api.Controllers;
 
@@ -23,6 +21,19 @@ public class TrucksController : ControllerBase
         this.mediator = mediator;
     }
 
+    [HttpGet("")]
+    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    {
+        var result = await this.mediator.Send(new TrucksList.Query(), cancellationToken);
+        IActionResult actionResult = result.Status switch
+        {
+            ResultStatus.Error => this.Problem(result.GetResultErrorsFormatted()),
+            ResultStatus.Ok => this.Ok(result.Value),
+            _ => this.Problem()
+        };
+        return actionResult;
+    }
+
     [HttpPost("")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AddTruck.CommandResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
@@ -35,7 +46,6 @@ public class TrucksController : ControllerBase
             ResultStatus.Ok => this.Ok(result.Value),
             _ => this.Problem(result.GetResultErrorsFormatted())
         };
-
         return actionResult;
     }
 }

@@ -8,6 +8,11 @@ public static class TrucksModuleConfiguration
 {
     public static void ConfigureTrucksModule(this IServiceCollection services)
     {
+        RegisterModuleServices(services);
+    }
+
+    private static void RegisterModuleServices(IServiceCollection services)
+    {
         services.AddTransient<ITrucksRepository, TrucksRepository>();
     }
 }

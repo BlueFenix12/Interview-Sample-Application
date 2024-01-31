@@ -8,6 +8,7 @@ builder.Services.ConfigureApiVersioning();
 builder.Services.ConfigureSwagger();
 builder.Services.ConfigureMediatR();
 builder.Services.ConfigureFluentValidations();
+builder.Services.ConfigureDatabase();
 builder.Services.ConfigureServices();
 
 var app = builder.Build();
