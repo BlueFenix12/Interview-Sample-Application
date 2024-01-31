@@ -24,4 +24,5 @@
     <ProjectReference Include="..\..\features\Trucks\TrucksManager.Trucks.Module\TrucksManager.Trucks.Module.csproj" />
   </ItemGroup>
 
+
 </Project>

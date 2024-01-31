@@ -4,9 +4,9 @@ using TrucksManager.Trucks.Module.Configuration;
 
 namespace TrucksApi.Configuration;
 
-public static class ControllersConfiguration
+internal static class ControllersConfiguration
 {
-    public static void ConfigureControllers(this IServiceCollection services)
+    public static void Configure(IServiceCollection services)
     {
         services
             .AddControllers(options => options.UseRoutePrefix("api/v{version:apiVersion}"))

@@ -2,9 +2,9 @@
 
 namespace TrucksApi.Configuration;
 
-public static class ModulesConfiguration
+internal static class ModulesConfiguration
 {
-    public static void ConfigureServices(this IServiceCollection services)
+    public static void Configure(IServiceCollection services)
     {
         services.ConfigureTrucksModule();
     }

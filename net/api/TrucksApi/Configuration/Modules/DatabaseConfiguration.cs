@@ -5,7 +5,7 @@ namespace TrucksApi.Configuration;
 
 public static class DatabaseConfiguration
 {
-    public static void ConfigureDatabase(this IServiceCollection services)
+    public static void Configure(IServiceCollection services)
     {
         services.AddDbContext<TrucksManagerDbContext>(options =>
         {

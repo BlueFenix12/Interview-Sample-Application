@@ -5,9 +5,9 @@ using TrucksManager.Trucks.Module.Configuration;
 
 namespace TrucksApi.Configuration;
 
-public static class MediatrConfiguration
+internal static class MediatrConfiguration
 {
-    public static void ConfigureMediatR(this IServiceCollection services)
+    public static void Configure(IServiceCollection services)
     {
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
         services.AddMediatR(configuration =>
