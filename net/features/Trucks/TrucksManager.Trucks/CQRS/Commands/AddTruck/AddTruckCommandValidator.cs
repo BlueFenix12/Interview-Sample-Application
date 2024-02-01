@@ -13,10 +13,12 @@ public sealed class AddTruckCommandValidator : AbstractValidator<AddTruck.Comman
 
         this.RuleFor(x => x.Code)
             .NotEmpty()
-            .MustAsync(CheckIfCodeIsValid)
+            .MustAsync(this.CheckIfCodeIsValid)
             .WithMessage("Invalid truck code - must be unique");
+        
         this.RuleFor(x => x.Name)
             .NotEmpty();
+        
         this.RuleFor(x => x.Status)
             .IsInEnum();
     }
