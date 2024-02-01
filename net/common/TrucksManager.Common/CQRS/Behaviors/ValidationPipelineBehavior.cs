@@ -1,6 +1,7 @@
 ﻿using Ardalis.Result;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace TrucksManager.Common.CQRS;
 
@@ -8,10 +9,14 @@ public class ValidationPipelineBehavior<TRequest, TResponse> : IPipelineBehavior
     where TRequest : class, IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> validators;
+    private readonly ILogger<ValidationPipelineBehavior<TRequest, TResponse>> logger;
 
-    public ValidationPipelineBehavior(IEnumerable<IValidator<TRequest>> validators)
+    public ValidationPipelineBehavior(
+        IEnumerable<IValidator<TRequest>> validators,
+        ILogger<ValidationPipelineBehavior<TRequest, TResponse>> logger)
     {
         this.validators = validators;
+        this.logger = logger;
     }
 
     public async Task<TResponse> Handle(
@@ -21,9 +26,11 @@ public class ValidationPipelineBehavior<TRequest, TResponse> : IPipelineBehavior
     {
         if (!this.validators.Any())
         {
+            this.logger.LogInformation("[{name}] Validation skipped - not found any validators", typeof(ValidationPipelineBehavior<TRequest, TResponse>).Name);
             return await next();
         }
         
+        this.logger.LogInformation("[{name}] Validation started", typeof(ValidationPipelineBehavior<TRequest, TResponse>).Name);
         var context = new ValidationContext<TRequest>(request);
         var validationResults = await Task.WhenAll(
             this.validators.Select(validator => validator.ValidateAsync(context, cancellationToken)));

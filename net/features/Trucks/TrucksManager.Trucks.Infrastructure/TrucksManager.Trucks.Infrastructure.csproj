@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\common\TrucksManager.Common\TrucksManager.Common.csproj" />
       <ProjectReference Include="..\..\..\infrastructure\TrucksManager.Infrastructure\TrucksManager.Infrastructure.csproj" />
       <ProjectReference Include="..\TrucksManager.Trucks.Domain\TrucksManager.Trucks.Domain.csproj" />
     </ItemGroup>

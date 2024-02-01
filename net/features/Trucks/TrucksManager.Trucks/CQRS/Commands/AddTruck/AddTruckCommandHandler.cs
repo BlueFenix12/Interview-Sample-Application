@@ -1,24 +1,25 @@
 ﻿using Ardalis.GuardClauses;
 using Ardalis.Result;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using TrucksManager.Trucks.Domain;
 using TrucksManager.Trucks.Infrastructure;
 
 namespace TrucksManager.Trucks.CQRS.Commands;
 
-public sealed class AddTruckCommandHandler : IRequestHandler<AddTruck.Command, Result<AddTruck.CommandResponse>>
+public sealed class AddTruckCommandHandler : IRequestHandler<AddTruck.Command, Result<AddTruck.CommandResult>>
 {
     private readonly ITrucksRepository repository;
+    private readonly ILogger<AddTruckCommandHandler> logger;
 
-    public AddTruckCommandHandler(ITrucksRepository repository)
+    public AddTruckCommandHandler(ITrucksRepository repository, ILogger<AddTruckCommandHandler> logger)
     {
         this.repository = repository;
+        this.logger = logger;
     }
 
-    public async Task<Result<AddTruck.CommandResponse>> Handle(AddTruck.Command request, CancellationToken cancellationToken)
+    public async Task<Result<AddTruck.CommandResult>> Handle(AddTruck.Command request, CancellationToken cancellationToken)
     {
-        Guard.Against.Null(request);
-
         Truck newTruck = new()
         {
             Id = Guid.NewGuid(),
@@ -28,10 +29,11 @@ public sealed class AddTruckCommandHandler : IRequestHandler<AddTruck.Command, R
             Description = request.Description
         };
 
-        var result = await this.repository.AddNewTruck(newTruck, cancellationToken);
-        
-        return result.IsSuccess
-            ? Result.Success(new AddTruck.CommandResponse { Id = result.Value })
-            : Result.Error("Unable to create a truck");
+        var addTruckResult = await this.repository.AddNewTruck(newTruck, cancellationToken);
+        return addTruckResult.Status switch
+        {
+            ResultStatus.Ok => Result.Success(new AddTruck.CommandResult { Id = addTruckResult.Value }),
+            _ => Result.Error(addTruckResult.Errors.ToArray())
+        };
     }
 }

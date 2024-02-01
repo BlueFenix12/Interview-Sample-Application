@@ -1,13 +1,25 @@
 ﻿using TrucksManager.Common.CQRS;
+using TrucksManager.Common.Models;
 using TrucksManager.Trucks.Domain;
+using TrucksManager.Trucks.Models;
 
-namespace TrucksManager.Trucks.CQRS.Queries.SingleTruck;
+namespace TrucksManager.Trucks.CQRS.Queries.SearchTrucks;
 
-public static class GetTruck
+public static class SearchTrucks
 {
-    public sealed class Query : IQuery<QueryResult>
+    public sealed class Query : IQuery<List<QueryResult>>
     {
-        public Guid Id { get; set; }
+        public PagingOptions PagingOptions { get; set; }
+        
+        public SortingOptions<SortableTruckFields> SortingOptions { get; set; }
+
+        public string? Code { get; set; }
+
+        public string? Name { get; set; }
+
+        public TruckStatus? Status { get; set; }
+
+        public string? Description { get; set; }
     }
 
     public sealed class QueryResult
@@ -20,8 +32,8 @@ public static class GetTruck
             this.Status = truck.Status;
             this.Description = truck.Description;
         }
-        
-        public Guid Id { get;  } = Guid.Empty;
+
+        public Guid Id { get; } = Guid.Empty;
     
         public string Code { get; } = string.Empty;
 
