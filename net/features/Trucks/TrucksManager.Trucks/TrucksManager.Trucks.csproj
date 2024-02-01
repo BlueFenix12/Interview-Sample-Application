@@ -21,6 +21,12 @@
       <ProjectReference Include="..\TrucksManager.Trucks.Infrastructure\TrucksManager.Trucks.Infrastructure.csproj" />
 
 
+
+
+
+
+
+
     </ItemGroup>
 
 

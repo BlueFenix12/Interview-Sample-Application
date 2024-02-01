@@ -64,11 +64,37 @@ public class TrucksRepository : ITrucksRepository
         try
         {
             var truck = await this.db.Trucks.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-            return Result.Success(truck);
+            return truck != null ? Result.Success(truck) : Result.NotFound();
         }
         catch (Exception e)
         {
             return Result.Error(e.Message, e.StackTrace);
         }
+    }
+
+    public async Task<Result> UpdateTruckAsync(Truck updatedTruck, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var truck = await this.db.Trucks.FirstOrDefaultAsync(x => x.Id == updatedTruck.Id, cancellationToken);
+            if (truck is null)
+            {
+                return Result.NotFound();
+            }
+            
+            truck.Name = updatedTruck.Name;
+            truck.Status = updatedTruck.Status;
+            truck.Description = updatedTruck.Description;
+
+            this.db.Entry(truck).State = EntityState.Modified;
+
+            await this.db.SaveChangesAsync(cancellationToken);
+        }
+        catch (Exception e)
+        {
+            return Result.Error(e.Message, e.StackTrace);
+        }
+        
+        return Result.Success();
     }
 }
