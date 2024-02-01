@@ -3,12 +3,7 @@ using TrucksApi.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.ConfigureSerilog();
-builder.Services.ConfigureControllers();
-builder.Services.ConfigureApiVersioning();
-builder.Services.ConfigureSwagger();
-builder.Services.ConfigureMediatR();
-
-builder.Host.ConfigureAutofacContainer();
+builder.Services.ConfigureApi();
 
 var app = builder.Build();
 

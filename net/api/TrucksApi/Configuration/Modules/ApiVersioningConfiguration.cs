@@ -3,9 +3,9 @@ using Asp.Versioning.Conventions;
 
 namespace TrucksApi.Configuration;
 
-public static class ApiVersioningConfiguration
+internal static class ApiVersioningConfiguration
 {
-    public static void ConfigureApiVersioning(this IServiceCollection services)
+    public static void Configure(IServiceCollection services)
     {
         services
             .AddApiVersioning(options =>

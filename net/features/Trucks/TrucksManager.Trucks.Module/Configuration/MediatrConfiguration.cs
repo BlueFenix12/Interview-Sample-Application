@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace TrucksManager.Trucks.Module.ApiConfiguration;
+namespace TrucksManager.Trucks.Module.Configuration;
 
 public static class MediatrConfiguration
 {

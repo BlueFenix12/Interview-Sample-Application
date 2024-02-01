@@ -5,9 +5,9 @@ using TrucksApi.Configuration.Swagger;
 
 namespace TrucksApi.Configuration;
 
-public static class SwaggerConfiguration
+internal static class SwaggerConfiguration
 {
-    public static void ConfigureSwagger(this IServiceCollection services)
+    public static void Configure(IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();
         services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigureOptions>();
