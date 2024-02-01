@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.5.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TrucksManager.Trucks.Api\TrucksManager.Trucks.Api.csproj" />
   </ItemGroup>
+
 
 </Project>
