@@ -20,6 +20,10 @@
       <ProjectReference Include="..\TrucksManager.Trucks.Domain\TrucksManager.Trucks.Domain.csproj" />
 
 
+
+
+
+
       <ProjectReference Include="..\TrucksManager.Trucks.Infrastructure\TrucksManager.Trucks.Infrastructure.csproj" />
 
 

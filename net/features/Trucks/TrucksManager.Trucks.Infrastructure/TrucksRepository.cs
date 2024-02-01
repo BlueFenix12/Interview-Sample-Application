@@ -1,5 +1,7 @@
-﻿using Ardalis.Result;
+﻿using System.Linq.Expressions;
+using Ardalis.Result;
 using Microsoft.EntityFrameworkCore;
+using TrucksManager.Common.Models;
 using TrucksManager.Infrastructure;
 using TrucksManager.Trucks.Domain;
 using TrucksManager.Trucks.Infrastructure;
@@ -117,5 +119,33 @@ public class TrucksRepository : ITrucksRepository
         }
         
         return Result.Success();
+    }
+
+    public async Task<Result<List<Truck>>> SearchTrucks(
+        Expression<Func<Truck, bool>> searchExpression,
+        Expression<Func<Truck, string>> sortingExpression,
+        SortDirection? sortDirection,
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var query = this.db.Trucks.Where(searchExpression);
+            var orderedQuery = (IOrderedQueryable<Truck>)((sortingExpression != null)
+                ? ((sortDirection == SortDirection.Asc) ? query.OrderBy(sortingExpression) : query.OrderByDescending(sortingExpression))
+                : query.OrderBy(x => "0"));
+            
+            var searchResult = await orderedQuery
+                .Skip(page)
+                .Take(pageSize)
+                .ToListAsync(cancellationToken);
+
+            return Result.Success(searchResult);
+        }
+        catch (Exception e)
+        {
+            return Result.Error(e.Message, e.StackTrace);
+        }
     }
 }
