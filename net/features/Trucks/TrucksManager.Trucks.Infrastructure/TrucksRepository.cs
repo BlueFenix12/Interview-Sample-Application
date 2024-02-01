@@ -132,9 +132,9 @@ public class TrucksRepository : ITrucksRepository
         try
         {
             var query = this.db.Trucks.Where(searchExpression);
-            var orderedQuery = (IOrderedQueryable<Truck>)((sortingExpression != null)
+            var orderedQuery = (sortingExpression != null)
                 ? ((sortDirection == SortDirection.Asc) ? query.OrderBy(sortingExpression) : query.OrderByDescending(sortingExpression))
-                : query.OrderBy(x => "0"));
+                : query.OrderBy(x => "0");
             
             var searchResult = await orderedQuery
                 .Skip(page)

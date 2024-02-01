@@ -3,11 +3,12 @@ using Ardalis.Result;
 using MediatR;
 using TrucksManager.Trucks.Domain;
 using TrucksManager.Trucks.Infrastructure;
+using TrucksManager.Trucks.Mappers;
 using TrucksManager.Trucks.Models;
 
 namespace TrucksManager.Trucks.CQRS.Queries.SearchTrucks;
 
-public class SearchTrucksQueryHandler : IRequestHandler<SearchTrucks.Query, Result<List<Truck>>>
+public class SearchTrucksQueryHandler : IRequestHandler<SearchTrucks.Query, Result<List<SearchTrucks.QueryResult>>>
 {
     private readonly ITrucksRepository repository;
 
@@ -16,7 +17,7 @@ public class SearchTrucksQueryHandler : IRequestHandler<SearchTrucks.Query, Resu
         this.repository = repository;
     }
 
-    public async Task<Result<List<Truck>>> Handle(SearchTrucks.Query request, CancellationToken cancellationToken)
+    public async Task<Result<List<SearchTrucks.QueryResult>>> Handle(SearchTrucks.Query request, CancellationToken cancellationToken)
     {
         var pageSize = request.PagingOptions.PageSize ?? 10;
         var pageNumber = request.PagingOptions.PageNumber ?? 1;
@@ -89,7 +90,7 @@ public class SearchTrucksQueryHandler : IRequestHandler<SearchTrucks.Query, Resu
             };
         }
 
-        var queryResult = await this.repository.SearchTrucks(
+        var searchTrucksResult = await this.repository.SearchTrucks(
             searchExpression,
             sortingExpression,
             request.SortingOptions.SortDirection,
@@ -97,7 +98,16 @@ public class SearchTrucksQueryHandler : IRequestHandler<SearchTrucks.Query, Resu
             pageSize,
             cancellationToken);
 
-        return queryResult;
+        if (!searchTrucksResult.IsSuccess)
+        {
+            return Result.Error(searchTrucksResult.Errors.ToArray());
+        }
+
+        var queryResult = searchTrucksResult.Value
+            .Select(x => new SearchTrucks.QueryResult(x))
+            .ToList();
+
+        return Result.Success(queryResult);
     }
     
 }

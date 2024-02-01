@@ -6,7 +6,7 @@ namespace TrucksManager.Trucks.CQRS.Commands;
 
 public static class AddTruck
 {
-    public sealed class Command : ICommand<CommandResponse>
+    public sealed class Command : ICommand<CommandResult>
     {
         public string Code { get; set; } = string.Empty;
 
@@ -17,9 +17,9 @@ public static class AddTruck
 
         public string Description { get; set; } = string.Empty;
     }
-    
-    public sealed class CommandResponse
+
+    public sealed class CommandResult
     {
-        public Guid Id { get; set; } = Guid.Empty;
+        public Guid Id { get; init; } = Guid.Empty;
     }
 }
