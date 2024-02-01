@@ -7,15 +7,15 @@ public static class UpdateTruck
 {
     public class BodyCommand
     {
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; init; } = string.Empty;
         
-        public TruckStatus Status { get; set; } = TruckStatus.OutOfService;
+        public TruckStatus Status { get; init; } = TruckStatus.OutOfService;
 
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; init; } = string.Empty;
     }
 
     public sealed class Command : BodyCommand, ICommand
     {
-        public Guid Id { get; set; } = Guid.Empty;
+        public Guid Id { get; init; } = Guid.Empty;
     }
 }

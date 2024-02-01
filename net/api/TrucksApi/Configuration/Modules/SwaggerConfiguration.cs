@@ -13,6 +13,11 @@ internal static class SwaggerConfiguration
         services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigureOptions>();
         services.AddSwaggerGen(options =>
         {
+            options.CustomSchemaIds(type =>
+            {
+                var fullSchemaName = type.FullName.Replace("+", "_");
+                return fullSchemaName;
+            });
             options.OperationFilter<SwaggerOperationFilter>();
         });
     }
@@ -23,6 +28,7 @@ internal static class SwaggerConfiguration
         application.UseSwaggerUI(options =>
         {
             options.DocumentTitle = "Trucks API";
+            
             
             IApiVersionDescriptionProvider apiProvider = application.Services.GetRequiredService<IApiVersionDescriptionProvider>();
             foreach(var description in apiProvider.ApiVersionDescriptions)

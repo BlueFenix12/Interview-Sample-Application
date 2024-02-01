@@ -28,7 +28,7 @@ public class TrucksController : ControllerBase
     }
 
     [HttpPost("search")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Truck>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<SearchTrucks.QueryResult>))]
     public async Task<IActionResult> SearchForTrucks([FromBody] SearchTrucks.Query query, CancellationToken cancellationToken)
     {
         var result = await this.mediator.Send(query, cancellationToken);
@@ -41,7 +41,7 @@ public class TrucksController : ControllerBase
     }
     
     [HttpPost("")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AddTruck.CommandResponse))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AddTruck.CommandResult))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
     public async Task<IActionResult> AddTruck([FromBody] AddTruck.Command command, CancellationToken cancellationToken)
     {
@@ -56,7 +56,7 @@ public class TrucksController : ControllerBase
     }
 
     [HttpGet("")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Truck>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TrucksList.QueryResult>))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
@@ -71,9 +71,9 @@ public class TrucksController : ControllerBase
     }
     
     [HttpGet("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Truck))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Truck))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetTruck.QueryResult))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var result = await this.mediator.Send(new GetTruck.Query { Id = id }, cancellationToken);

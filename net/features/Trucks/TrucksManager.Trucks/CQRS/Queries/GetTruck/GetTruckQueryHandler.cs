@@ -1,11 +1,10 @@
 ﻿using Ardalis.Result;
 using MediatR;
-using TrucksManager.Trucks.Domain;
 using TrucksManager.Trucks.Infrastructure;
 
 namespace TrucksManager.Trucks.CQRS.Queries.SingleTruck;
 
-public class GetTruckQueryHandler : IRequestHandler<GetTruck.Query, Result<Truck>>
+public class GetTruckQueryHandler : IRequestHandler<GetTruck.Query, Result<GetTruck.QueryResult>>
 {
     private readonly ITrucksRepository repository;
 
@@ -14,9 +13,14 @@ public class GetTruckQueryHandler : IRequestHandler<GetTruck.Query, Result<Truck
         this.repository = repository;
     }
 
-    public async Task<Result<Truck>> Handle(GetTruck.Query request, CancellationToken cancellationToken)
+    public async Task<Result<GetTruck.QueryResult>> Handle(GetTruck.Query request, CancellationToken cancellationToken)
     {
-        var result = await this.repository.GetTruckAsync(request.Id, cancellationToken);
-        return result;
+        var getTruckResult = await this.repository.GetTruckAsync(request.Id, cancellationToken);
+        return getTruckResult.Status switch
+        {
+            ResultStatus.Ok => Result.Success(new GetTruck.QueryResult(getTruckResult.Value)),
+            ResultStatus.NotFound => Result.NotFound(),
+            _ => Result.Error(getTruckResult.Errors.ToArray())
+        };
     }
 }
