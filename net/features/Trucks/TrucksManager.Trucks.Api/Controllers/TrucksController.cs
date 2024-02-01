@@ -7,6 +7,7 @@ using TrucksManager.Common;
 using TrucksManager.Trucks.CQRS.Commands;
 using TrucksManager.Trucks.CQRS.Commands.DeleteTruck;
 using TrucksManager.Trucks.CQRS.Commands.UpdateTruck;
+using TrucksManager.Trucks.CQRS.Queries.SearchTrucks;
 using TrucksManager.Trucks.CQRS.Queries.SingleTruck;
 using TrucksManager.Trucks.CQRS.Queries.TrucksList;
 using TrucksManager.Trucks.Domain;
@@ -24,6 +25,19 @@ public class TrucksController : ControllerBase
     public TrucksController(IMediator mediator)
     {
         this.mediator = mediator;
+    }
+
+    [HttpPost("search")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Truck>))]
+    public async Task<IActionResult> SearchForTrucks([FromBody] SearchTrucks.Query query, CancellationToken cancellationToken)
+    {
+        var result = await this.mediator.Send(query, cancellationToken);
+        IActionResult actionResult = result.Status switch
+        {
+            ResultStatus.Ok => this.Ok(result.Value),
+            _ => this.Problem(result.GetResultErrorsFormatted())
+        };
+        return actionResult;
     }
     
     [HttpPost("")]
