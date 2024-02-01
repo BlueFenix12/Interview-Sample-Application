@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrucksManager.Common;
 using TrucksManager.Trucks.CQRS.Commands;
+using TrucksManager.Trucks.CQRS.Commands.DeleteTruck;
 using TrucksManager.Trucks.CQRS.Commands.UpdateTruck;
 using TrucksManager.Trucks.CQRS.Queries.SingleTruck;
 using TrucksManager.Trucks.CQRS.Queries.TrucksList;
@@ -73,13 +74,31 @@ public class TrucksController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Truck))]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateTruck([FromRoute] Guid id, [FromBody] UpdateTruck.BodyCommand bodyCommand, CancellationToken cancellationToken)
     {
         var command = bodyCommand.MapToUpdateTruckCommand(id);
         var result = await this.mediator.Send(command, cancellationToken);
+        IActionResult actionResult = result.Status switch
+        {
+            ResultStatus.Ok => this.Ok(),
+            ResultStatus.NotFound => this.NotFound(),
+            ResultStatus.Invalid => this.BadRequest(result.ValidationErrors),
+            ResultStatus.Error => this.Problem(result.GetResultErrorsFormatted()),
+            _ => this.Problem()
+        };
+        return actionResult;
+    }
+
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteTruck([FromRoute] Guid id, CancellationToken cancellationToken)
+    {
+        var result = await this.mediator.Send(new DeleteTruck.Command { Id = id }, cancellationToken);
         IActionResult actionResult = result.Status switch
         {
             ResultStatus.Ok => this.Ok(),
