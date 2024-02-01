@@ -10,4 +10,5 @@ public interface ITrucksRepository
     Task<Result<List<Truck>>> GetAllTrucksAsync(CancellationToken cancellationToken);
     Task<Result<Truck>> GetTruckAsync(Guid requestId, CancellationToken cancellationToken);
     Task<Result> UpdateTruckAsync(Truck updatedTruck, CancellationToken cancellationToken);
+    Task<Result> DeleteTruckAsync(Guid requestId, CancellationToken cancellationToken);
 }

@@ -97,4 +97,25 @@ public class TrucksRepository : ITrucksRepository
         
         return Result.Success();
     }
+
+    public async Task<Result> DeleteTruckAsync(Guid requestId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var truck = await this.db.Trucks.FirstOrDefaultAsync(x => x.Id == requestId, cancellationToken);
+            if (truck is null)
+            {
+                return Result.NotFound();
+            }
+
+            this.db.Trucks.Remove(truck);
+            await this.db.SaveChangesAsync(cancellationToken);
+        }
+        catch (Exception e)
+        {
+            return Result.Error(e.Message, e.StackTrace);
+        }
+        
+        return Result.Success();
+    }
 }
