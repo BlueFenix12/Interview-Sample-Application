@@ -1,0 +1,582 @@
+{
+	"info": {
+		"_postman_id": "0b9ff713-9d9a-4454-9087-bc7355ebab21",
+		"name": "Trucks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23798274"
+	},
+	"item": [
+		{
+			"name": "Add Trucks",
+			"item": [
+				{
+					"name": "Invalid Code",
+					"item": [
+						{
+							"name": "Add Truck",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"DOMO1234\",\r\n  \"name\": \"Demo 1\",\r\n  \"status\": \"OutOfService\",\r\n  \"description\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/Trucks",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Trucks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Truck - Failed",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"DOMO1234\",\r\n  \"name\": \"Demo 1\",\r\n  \"status\": \"OutOfService\",\r\n  \"description\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/Trucks",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Trucks"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Demo Truck - 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.collectionVariables.set('truck-1-id', responseData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"LULU1234\",\r\n  \"name\": \"Demo 1\",\r\n  \"status\": \"OutOfService\",\r\n  \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Demo Truck - 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks/{{truck-1-id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks",
+								"{{truck-1-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Demo Truck - 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.collectionVariables.set('truck-2-id', responseData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"DEMO4321\",\r\n  \"name\": \"Demo 2\",\r\n  \"status\": \"OutOfService\",\r\n  \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Demo Truck - 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks/{{truck-2-id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks",
+								"{{truck-2-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Demo Truck - 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.collectionVariables.set('truck-3-id', responseData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"OMED1234\",\r\n  \"name\": \"Demo 3\",\r\n  \"status\": \"OutOfService\",\r\n  \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Demo Truck - 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks/{{truck-3-id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks",
+								"{{truck-3-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Demo Truck - 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.collectionVariables.set('truck-4-id', responseData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"OMED4321\",\r\n  \"name\": \"Demo 3\",\r\n  \"status\": \"OutOfService\",\r\n  \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Demo Truck - 4",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks/{{truck-4-id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks",
+								"{{truck-4-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search Trucks",
+			"item": [
+				{
+					"name": "Search - Code - ASC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"pagingOptions\": {\r\n    \"pageSize\": 5,\r\n    \"pageNumber\": 1\r\n  },\r\n  \"sortingOptions\": {\r\n    \"sortBy\": \"Code\",\r\n    \"sortDirection\": \"Asc\"\r\n  },\r\n  \"code\": \"AS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks/search",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search - Name - DESC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"pagingOptions\": {\r\n    \"pageSize\": 5,\r\n    \"pageNumber\": 1\r\n  },\r\n  \"sortingOptions\": {\r\n    \"sortBy\": \"Name\",\r\n    \"sortDirection\": \"Desc\"\r\n  },\r\n  \"name\": \"Demo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks/search",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update Truck",
+			"item": [
+				{
+					"name": "Add Truck",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.collectionVariables.set('truck-update-id', responseData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"UPDATE1234\",\r\n  \"name\": \"Demo 1\",\r\n  \"status\": \"OutOfService\",\r\n  \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Status to Loading",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Update\",\r\n  \"status\": \"Loading\",\r\n  \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks/{{truck-update-id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks",
+								"{{truck-update-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Status to AtJob",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Update\",\r\n  \"status\": \"AtJob\",\r\n  \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks/{{truck-update-id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks",
+								"{{truck-update-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete Truck",
+			"item": [
+				{
+					"name": "Add Truck",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.collectionVariables.set('truck-delete-id', responseData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"DELETE1234\",\r\n  \"name\": \"Demo 1\",\r\n  \"status\": \"OutOfService\",\r\n  \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/Trucks/{{truck-delete-id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Trucks",
+								"{{truck-delete-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "truck-1-id",
+			"value": ""
+		},
+		{
+			"key": "truck-update-id",
+			"value": ""
+		},
+		{
+			"key": "truck-delete-id",
+			"value": ""
+		}
+	]
+}
