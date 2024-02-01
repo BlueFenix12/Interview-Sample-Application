@@ -21,8 +21,8 @@ public class TrucksRepository : ITrucksRepository
         {
             var exists = await this.db.Trucks.AnyAsync(x => x.Code == code, cancellationToken);
             return exists
-                ? Result.Success()
-                : Result.Conflict();
+                ? Result.Conflict()
+                : Result.Success();
         }
         catch (Exception e)
         {
@@ -52,6 +52,19 @@ public class TrucksRepository : ITrucksRepository
         {
             var trucks = await this.db.Trucks.ToListAsync(cancellationToken);
             return Result.Success(trucks);
+        }
+        catch (Exception e)
+        {
+            return Result.Error(e.Message, e.StackTrace);
+        }
+    }
+
+    public async Task<Result<Truck>> GetTruckAsync(Guid id, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var truck = await this.db.Trucks.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+            return Result.Success(truck);
         }
         catch (Exception e)
         {
